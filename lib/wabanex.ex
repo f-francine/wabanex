@@ -1,3 +1,2 @@
 defmodule Wabanex do
-
 end
