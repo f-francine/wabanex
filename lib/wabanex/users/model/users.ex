@@ -12,13 +12,15 @@ defmodule Wabanex.Model.Users do
     field(:email, :string)
     field(:nickname, :string)
     field(:password, :string)
+
+    timestamps()
   end
 
   def changeset(data \\ %__MODULE__{}, params) do
     data
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> unique_constraint(:email)
-    |> unique_constraint(:nickname)
+    |> unique_constraint([:email])
+    |> unique_constraint([:nickname])
   end
 end

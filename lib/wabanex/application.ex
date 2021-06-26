@@ -6,7 +6,6 @@ defmodule Wabanex.Application do
   def start(_type, _args) do
     children = [
       Wabanex.Repo,
-      WabanexWeb.Telemetry,
       {Phoenix.PubSub, name: Wabanex.PubSub},
       WabanexWeb.Endpoint
     ]

@@ -11,6 +11,8 @@ defmodule Wabanex.Repo.Migrations.CreateUsersTable do
       timestamps()
     end
 
-    create unique_index(:users, [:email, :nickname])
+    create unique_index(:users, [:email])
+    create unique_index(:users, [:nickname])
+
   end
 end
