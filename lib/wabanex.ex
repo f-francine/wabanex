@@ -1,25 +1,14 @@
 defmodule Wabanex do
-  alias Wabanex.Repo
-  alias Wabanex.Model.Users
+  alias  Wabanex.Users.User
+  alias Wabanex.Trainings.Training
 
   @spec create_user(params :: any()) :: {:ok, struct} | {:error, :invalid_params}
-  def create_user(params) do
-    params
-    |> Users.changeset()
-    |> Repo.insert()
-    |> case do
-      {:ok, struct} -> {:ok, struct}
-      {:error, _changeset} -> {:error, :invalid_params}
-    end
-  end
+  defdelegate create_user(params), to:  User, as: :create_user
 
-  @spec get_user(params :: any()) :: {:ok, Users.t()} | {:error, :not_found}
-  def get_user(user_id) do
-    User
-    |> Repo.get(user_id)
-    |> case do
-      nil -> {:error, :not_found}
-      user -> {:ok, user}
-    end
-  end
+  @spec get_user(user_id :: Ecto.UUID.t) :: {:ok, Users.t()} | {:error, :not_found}
+  defdelegate get_user(user_id), to: User, as: :get_user
+
+  @spec create_training(params :: any()) :: {:ok, Training.t} | {:error, Ecto.Changeset.t}
+  defdelegate create_training(params), to: Training, as: :create_training
+
 end

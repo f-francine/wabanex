@@ -17,7 +17,6 @@ defmodule WabanexWeb.Router do
   end
 
   if Mix.env() in [:dev, :test] do
-
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
     end

@@ -1,5 +1,7 @@
-defmodule Wabanex.Model.Users do
+defmodule Wabanex.Users.Model.Users do
   use Ecto.Schema
+
+  alias Wabanex.Trainings.Model.Training
 
   import Ecto.Changeset
 
@@ -7,11 +9,13 @@ defmodule Wabanex.Model.Users do
   @optional_fields []
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
-  schema "users" do
+  schema "user" do
     field(:name, :string)
     field(:email, :string)
     field(:nickname, :string)
     field(:password, :string)
+
+    has_many(:trainings, Training)
 
     timestamps()
   end
@@ -21,6 +25,5 @@ defmodule Wabanex.Model.Users do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> unique_constraint([:email])
-    |> unique_constraint([:nickname])
   end
 end
